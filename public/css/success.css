@@ -1,0 +1,40 @@
+:root {
+    --kac-red:#d90713;
+}
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    color: darkgrey;
+    font-size: 22px;
+    padding: 15px;
+}
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    font-size: 26px;
+    color: var(--kac-red);
+    margin: auto; 
+    padding: 15px;
+    text-align: center;
+}
+div {
+    padding: 50px;
+    border: 1px solid darkgrey;
+    margin: auto;
+    border-radius: 5px;;
+}
+a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: end;
+    color: white;
+    background-color: var(--kac-red);
+    border: 2px solid var(--kac-red);
+    border-radius: 5px;
+    padding: 15px;
+    text-decoration: none;
+    float: right;
+}
+#link_redirect{
+    text-align: end;
+}

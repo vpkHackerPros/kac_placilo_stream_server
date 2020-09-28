@@ -36,6 +36,11 @@ const formateStripePayerInfo = (stripeInfo) => {
 const formatPayPalPayerInfo = (payPalInfo) => {
   console.log('uuuu senpai ur server got paypaaaaal infoooo')
   console.log(payPalInfo)
+  console.log(payPalInfo.update_time)
+  console.log('email' + payPalInfo.payer.email.email_address)
+  console.log('name' + payPalInfo.payer.name.given_name)
+  console.log('surname' + payPalInfo.payer.name.surname)
+  console.log('time' + payPalInfo.update_time)
   return new PaymentInfo(
     payPalInfo.payer.name.given_name, 
     payPalInfo.payer.name.surname, 
@@ -74,8 +79,14 @@ app.post("/create-checkout-session", async (req, res) => {
   res.json({ id: session.id });
 });
 app.post('/onPayPalPayment', bodyParser.raw({type: 'application/json'}), (req, res) => {
-  console.log('startData =', req.body)
-  doOnPayment(formatPayPalPayerInfo(req.body))
+  let data
+  try {
+    data = JSON.parse(req.body);
+  } catch (err) {
+    console.log('Didnit parse,')
+  }
+  console.log('startData =', data)
+  doOnPayment(formatPayPalPayerInfo(data))
   res.sendStatus(200)
 })
 
