@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const stripe = require('stripe')('sk_test_51HTk05KfFZQiWrPrEvFmmvjYs27EeySW2x4YyX2fBvBa69UbH6Mtw1WRtqBwQ33IafDgRx3HJ4bn0SkGL0dyg8Wl001pt7oSOn');
+
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'))
 app.set('views', './views')
@@ -14,8 +16,12 @@ class PaymentInfo {
   }
 }
 
+const generatePassword = () => {
+  return 'burek2020'
+}
+
 const getEmailBody = (payementInfo) => {
-  return 'this is an email body'
+  return `Živjo!\nTukaj imaš geslo: ${generatePassword()}`
 }
 const sendEmail = ( address, body ) => {
   console.log(`sending email to ${address} with body: \n ${body}`)
@@ -35,7 +41,6 @@ const doOnPayment = ( paymentInfo ) => {
   sendEmail(paymentInfo.email, getEmailBody(paymentInfo))
   addPaymentToDataBase(paymentInfo)
 }
-const stripe = require('stripe')('sk_test_51HTk05KfFZQiWrPrEvFmmvjYs27EeySW2x4YyX2fBvBa69UbH6Mtw1WRtqBwQ33IafDgRx3HJ4bn0SkGL0dyg8Wl001pt7oSOn');
 
 app.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
