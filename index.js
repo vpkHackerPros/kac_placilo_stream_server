@@ -33,19 +33,18 @@ const addPaymentToDataBase = ( paymentInfo ) => {
 const formateStripePayerInfo = (stripeInfo) => {
   return new PaymentInfo('ivan', 'anon', 'ivan.anon@gmail.com', '4:20:690__11_9_2020', 'one_game')
 }
-const formatPayPalPayerInfo = (payPalInfo) => {
+const formatPayPalPayerInfo = (data) => {
   console.log('uuuu senpai ur server got paypaaaaal infoooo')
-  console.log(payPalInfo)
-  console.log(payPalInfo.update_time)
-  console.log('email' + payPalInfo.payer.email.email_address)
-  console.log('name' + payPalInfo.payer.name.given_name)
-  console.log('surname' + payPalInfo.payer.name.surname)
-  console.log('time' + payPalInfo.update_time)
+  console.log(data)
+  console.log('name '    + data.payPalInfo.payer.name.given_name)
+  console.log('surname ' + data.payPalInfo.payer.name.surname)
+  console.log('email '   + data.payPalInfo.payer.email_address)
+  console.log('time '    + data.payPalInfo.update_time)
   return new PaymentInfo(
-    payPalInfo.payer.name.given_name, 
-    payPalInfo.payer.name.surname, 
-    payPalInfo.payer.email.email_address, 
-    payPalInfo.update_time, 
+    data.payPalInfo.payer.name.given_name, 
+    data.payPalInfo.payer.name.surname, 
+    data.payPalInfo.payer.email_address, 
+    data.payPalInfo.update_time, 
     'paypal_one_stream'
   )
 }
